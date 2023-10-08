@@ -6,7 +6,7 @@ using EFT;
 
 namespace EOH
 {
-    [BepInPlugin("com.dvize.EqualOpportunityHater", "dvize.EqualOpportunityHater", "1.0.0")]
+    [BepInPlugin("com.dvize.EqualOpportunityHater", "dvize.EqualOpportunityHater", "1.1.0")]
     public class EOHPlugin : BaseUnityPlugin
     {
         public static ConfigEntry<bool> pmcsIncluded;

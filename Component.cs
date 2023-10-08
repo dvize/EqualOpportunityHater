@@ -13,8 +13,8 @@ namespace EOH
         private WildSpawnType sptBear;
         private Player player;
 
-        private static BotControllerClass botController;
-        private static BotSpawnerClass botSpawnerClass;
+        private static BotsController botController;
+        private static BotSpawner botSpawnerClass;
         protected static ManualLogSource Logger
         {
             get; private set;
