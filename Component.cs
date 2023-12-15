@@ -56,7 +56,6 @@ namespace EOH
             if (!botOwner.GetPlayer.IsYourPlayer)
             {
                 player = botOwner.GetPlayer;
-                Logger.LogDebug("In OnPlayerAdded Method: " + player.gameObject.name);
 
                 //if botOwner is a pmc than add to all other pmcs alive
                 if (EOHPlugin.pmcsIncluded.Value && isPMC(botOwner.GetPlayer))
@@ -66,10 +65,16 @@ namespace EOH
                         if (isPMC(bot) && bot.AIData.BotOwner != botOwner)
                         {
                             //remove allies if they exist of current bot
-                            botOwner.BotsGroup.RemoveAlly(bot.AIData.BotOwner);
-                            var botSettingsClass = new BotSettingsClass(Singleton<GameWorld>.Instance.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
-                            botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
-                            Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
+                            //botOwner.BotsGroup.RemoveAlly(bot.AIData.BotOwner);
+
+                            //check to see if bot is in botsgroup, otherwise add as enemy
+
+                            if (!bot.AIData.BotOwner.BotsGroup.Contains(bot.AIData.BotOwner))
+                            {
+                                var botSettingsClass = new BotSettingsClass(Singleton<GameWorld>.Instance.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
+                                botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
+                                Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
+                            }
                         }
                     }
                 }
@@ -80,10 +85,14 @@ namespace EOH
                     {
                         if (isScav(bot) && bot.AIData.BotOwner != botOwner)
                         {
-                            botOwner.BotsGroup.RemoveAlly(bot.AIData.BotOwner);
-                            var botSettingsClass = new BotSettingsClass(Singleton<GameWorld>.Instance.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
-                            botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
-                            Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
+                            //botOwner.BotsGroup.RemoveAlly(bot.AIData.BotOwner);
+
+                            if (!bot.AIData.BotOwner.BotsGroup.Contains(bot.AIData.BotOwner))
+                            {
+                                var botSettingsClass = new BotSettingsClass(Singleton<GameWorld>.Instance.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
+                                botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
+                                Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
+                            }
                         }
                     }
                 }
