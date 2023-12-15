@@ -67,7 +67,7 @@ namespace EOH
 
             foreach (var bot in gameWorld.AllAlivePlayersList)
             {
-                if (IsEnemy(botOwner, bot) && !botOwner.BotsGroup.Contains(bot.AIData.BotOwner))
+                if (!botOwner.BotsGroup.Contains(bot.AIData.BotOwner))
                 {
                     var botSettingsClass = new BotSettingsClass(gameWorld.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
                     botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
@@ -82,7 +82,7 @@ namespace EOH
 
             foreach (var bot in gameWorld.AllAlivePlayersList)
             {
-                if (IsEnemy(botOwner, bot) && !botOwner.BotsGroup.Contains(bot.AIData.BotOwner))
+                if (!botOwner.BotsGroup.Contains(bot.AIData.BotOwner))
                 {
                     var botSettingsClass = new BotSettingsClass(gameWorld.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
                     botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
@@ -90,12 +90,6 @@ namespace EOH
                 }
             }
         }
-        private bool IsEnemy(BotOwner botOwner, Player bot)
-        {
-            return bot.AIData.BotOwner != botOwner &&
-                   (isPMC(bot) || isScav(bot));
-        }
-
         private void HandleEnemyRelationship(BotOwner botOwner, Player bot)
         {
             if (!bot.AIData.BotOwner.BotsGroup.Contains(bot.AIData.BotOwner))
@@ -125,14 +119,6 @@ namespace EOH
 
             return false;
         }
-        private void OnPlayerRemoved(BotOwner botOwner)
-        {
-
-        }
-
-
-
-
 
 
     }
