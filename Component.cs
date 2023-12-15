@@ -62,7 +62,7 @@ namespace EOH
 
         private void AddEnemyPMCs(BotOwner botOwner)
         {
-            if (!EOHPlugin.pmcsIncluded.Value) 
+            if (!EOHPlugin.pmcsIncluded.Value)
                 return;
 
             foreach (var bot in gameWorld.AllAlivePlayersList)
@@ -71,13 +71,15 @@ namespace EOH
                 {
                     var botSettingsClass = new BotSettingsClass(gameWorld.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
                     botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
-                    Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
+#if DEBUG
+                        Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
+#endif
                 }
             }
         }
         private void AddEnemyScavs(BotOwner botOwner)
         {
-            if (!EOHPlugin.scavsIncluded.Value) 
+            if (!EOHPlugin.scavsIncluded.Value)
                 return;
 
             foreach (var bot in gameWorld.AllAlivePlayersList)
@@ -86,7 +88,9 @@ namespace EOH
                 {
                     var botSettingsClass = new BotSettingsClass(gameWorld.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
                     botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
-                    Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
+#if DEBUG
+                        Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
+#endif
                 }
             }
         }
