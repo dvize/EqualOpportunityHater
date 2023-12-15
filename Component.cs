@@ -90,15 +90,6 @@ namespace EOH
                 }
             }
         }
-        private void HandleEnemyRelationship(BotOwner botOwner, Player bot)
-        {
-            if (!bot.AIData.BotOwner.BotsGroup.Contains(bot.AIData.BotOwner))
-            {
-                var botSettingsClass = new BotSettingsClass(gameWorld.GetAlivePlayerByProfileID(bot.ProfileId), bot.BotsGroup);
-                botOwner.Memory.AddEnemy(bot, botSettingsClass, true);
-                Logger.LogWarning($"For botOwner{botOwner.Id}({botOwner.Profile.Info.Settings.Role}): adding Enemy BotID:{bot.Id}({bot.Profile.Info.Settings.Role}) and Name:{bot.name}");
-            }
-        }
 
         private bool isPMC(Player player)
         {
